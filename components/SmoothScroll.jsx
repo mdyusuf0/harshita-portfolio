@@ -40,6 +40,11 @@ const SmoothScroll = ({ children }) => {
 
     gsap.ticker.lagSmoothing(0);
 
+    // Refresh ScrollTrigger after initial mount and after preloader finishes
+    setTimeout(() => ScrollTrigger.refresh(), 400);
+    setTimeout(() => ScrollTrigger.refresh(), 1500);
+    setTimeout(() => ScrollTrigger.refresh(), 3500);
+
     return () => {
       lenis.destroy();
       if (typeof window !== "undefined" && window.__lenis === lenis) {

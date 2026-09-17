@@ -1,8 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { motion } from "framer-motion";
 
 const EXPERIENCES = [
   {
@@ -46,33 +44,8 @@ const EXPERIENCES = [
 ];
 
 const ExperienceSection = () => {
-  const sectionRef = useRef(null);
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    gsap.registerPlugin(ScrollTrigger);
-
-    const ctx = gsap.context(() => {
-      const items = sectionRef.current.querySelectorAll(".exp-item");
-      gsap.from(items, {
-        opacity: 0,
-        y: 40,
-        duration: 0.9,
-        stagger: 0.1,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 80%",
-          once: true,
-        },
-      });
-    }, sectionRef.current);
-
-    return () => ctx.revert();
-  }, []);
-
   return (
-    <section id="experience-section" ref={sectionRef} className="w-full px-6 sm:px-12 lg:px-20 py-24 bg-bg text-fg">
+    <section id="experience-section" className="w-full px-6 sm:px-12 lg:px-20 py-24 bg-bg text-fg">
       <div className="pj-head mb-12">
         <span className="pj-label">CAREER JOURNEY</span>
         <h2 className="pj-title">internships &amp; research</h2>
@@ -80,8 +53,12 @@ const ExperienceSection = () => {
 
       <div className="flex flex-col gap-10">
         {EXPERIENCES.map((exp, idx) => (
-          <div
+          <motion.div
             key={exp.company}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-30px" }}
+            transition={{ duration: 0.6, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
             className="exp-item p-6 sm:p-8 lg:p-10 rounded-3xl bg-bg-alt border border-theme-border hover:border-accent/60 transition-all duration-300 shadow-sm hover:shadow-xl relative overflow-hidden"
           >
             {/* Top row */}
@@ -126,7 +103,7 @@ const ExperienceSection = () => {
                 </span>
               ))}
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
     </section>

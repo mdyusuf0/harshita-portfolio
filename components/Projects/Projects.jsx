@@ -167,32 +167,51 @@ const Projects = () => {
 
     const ctx = gsap.context(() => {
       const rows = sectionRef.current.querySelectorAll(".pj-row");
-      gsap.from(rows, {
-        opacity: 0,
-        y: 60,
-        duration: 0.9,
-        stagger: 0.08,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 80%",
-          once: true,
-        },
-      });
+      gsap.fromTo(
+        rows,
+        { opacity: 0, y: 40 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          stagger: 0.08,
+          ease: "power3.out",
+          clearProps: "all",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 85%",
+            once: true,
+          },
+        }
+      );
 
       const titles = sectionRef.current.querySelectorAll(".pj-title");
-      gsap.from(titles, {
-        opacity: 0,
-        y: 40,
-        duration: 1,
-        stagger: 0.15,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 85%",
-          once: true,
-        },
-      });
+      gsap.fromTo(
+        titles,
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          stagger: 0.1,
+          ease: "power3.out",
+          clearProps: "all",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 85%",
+            once: true,
+          },
+        }
+      );
+
+      const fallbackTimer = setTimeout(() => {
+        rows.forEach((r) => {
+          r.style.opacity = "1";
+          r.style.transform = "none";
+        });
+      }, 2500);
+
+      return () => clearTimeout(fallbackTimer);
     }, sectionRef.current);
 
     return () => ctx.revert();

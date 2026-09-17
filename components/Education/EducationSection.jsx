@@ -1,8 +1,7 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import React from "react";
+import { motion } from "framer-motion";
 
 const EDUCATION = [
   {
@@ -55,33 +54,8 @@ const ACHIEVEMENTS = [
 ];
 
 const EducationSection = () => {
-  const sectionRef = useRef(null);
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    gsap.registerPlugin(ScrollTrigger);
-
-    const ctx = gsap.context(() => {
-      const cards = sectionRef.current.querySelectorAll(".edu-card");
-      gsap.from(cards, {
-        opacity: 0,
-        y: 40,
-        duration: 0.8,
-        stagger: 0.08,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 80%",
-          once: true,
-        },
-      });
-    }, sectionRef.current);
-
-    return () => ctx.revert();
-  }, []);
-
   return (
-    <section id="education-section" ref={sectionRef} className="w-full px-6 sm:px-12 lg:px-20 py-24 bg-bg text-fg">
+    <section id="education-section" className="w-full px-6 sm:px-12 lg:px-20 py-24 bg-bg text-fg">
       {/* Education Header */}
       <div className="pj-head mb-12">
         <span className="pj-label">ACADEMIC BACKGROUND</span>
@@ -91,8 +65,12 @@ const EducationSection = () => {
       {/* Education Grid */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 mb-20">
         {EDUCATION.map((edu, idx) => (
-          <div
+          <motion.div
             key={edu.degree}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-30px" }}
+            transition={{ duration: 0.6, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
             className="edu-card p-6 sm:p-8 rounded-3xl bg-bg-alt border border-theme-border hover:border-accent transition-all duration-300 flex flex-col justify-between shadow-sm hover:shadow-xl hover:-translate-y-1"
           >
             <div>
@@ -117,7 +95,7 @@ const EducationSection = () => {
             <div className="pt-4 mt-6 border-t border-theme-border/60 text-xs font-mono text-fg-muted">
               {edu.period}
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
 
@@ -128,9 +106,13 @@ const EducationSection = () => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
-        {ACHIEVEMENTS.map((ach) => (
-          <div
+        {ACHIEVEMENTS.map((ach, idx) => (
+          <motion.div
             key={ach.title}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-30px" }}
+            transition={{ duration: 0.6, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
             className="edu-card p-6 sm:p-8 rounded-2xl bg-bg-alt border border-theme-border hover:border-accent transition-all duration-300 shadow-sm hover:shadow-lg flex flex-col justify-between"
           >
             <div>
@@ -144,7 +126,7 @@ const EducationSection = () => {
                 {ach.summary}
               </p>
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
     </section>
