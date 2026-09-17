@@ -1,8 +1,7 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import CertificateModal from "./CertificateModal";
 
 const CERTIFICATES = [
@@ -134,38 +133,14 @@ const CATEGORIES = ["ALL", "AI & ML", "INTERNSHIPS", "TECHNICAL & CLOUD", "DATA 
 const Certificates = () => {
   const [activeCategory, setActiveCategory] = useState("ALL");
   const [selectedCert, setSelectedCert] = useState(null);
-  const sectionRef = useRef(null);
 
   const filteredCerts =
     activeCategory === "ALL"
       ? CERTIFICATES
       : CERTIFICATES.filter((c) => c.category.toLowerCase() === activeCategory.toLowerCase());
 
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    gsap.registerPlugin(ScrollTrigger);
-
-    const ctx = gsap.context(() => {
-      const cards = sectionRef.current.querySelectorAll(".cert-card");
-      gsap.from(cards, {
-        opacity: 0,
-        y: 40,
-        duration: 0.8,
-        stagger: 0.06,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 80%",
-          once: true,
-        },
-      });
-    }, sectionRef.current);
-
-    return () => ctx.revert();
-  }, [activeCategory]);
-
   return (
-    <section id="certificates-section" ref={sectionRef} className="w-full px-6 sm:px-12 lg:px-20 py-24 bg-bg text-fg">
+    <section id="certificates-section" className="w-full px-6 sm:px-12 lg:px-20 py-24 bg-bg text-fg">
       <div className="pj-head mb-8">
         <span className="pj-label">VERIFIED CREDENTIALS</span>
         <h2 className="pj-title">certifications &amp; honors</h2>
@@ -191,60 +166,67 @@ const Certificates = () => {
 
       {/* Certificates Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-        {filteredCerts.map((cert) => (
-          <div
-            key={cert.id}
-            onClick={() => setSelectedCert(cert)}
-            className="cert-card group p-5 rounded-2xl bg-bg-alt border border-theme-border hover:border-accent transition-all duration-300 flex flex-col justify-between cursor-pointer hover:-translate-y-1.5 shadow-sm hover:shadow-xl"
-          >
-            <div>
-              {/* Thumbnail Container */}
-              <div className="relative w-full aspect-[4/3] rounded-xl overflow-hidden mb-4 bg-black/5 border border-theme-border group-hover:border-accent/40 transition-colors flex items-center justify-center">
-                <img
-                  src={cert.image}
-                  alt={cert.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  loading="lazy"
-                />
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center">
-                  <span className="opacity-0 group-hover:opacity-100 transition-opacity bg-bg/90 backdrop-blur-sm text-fg text-xs font-semibold px-3 py-1.5 rounded-full shadow-md flex items-center gap-1">
-                    <span>Inspect</span>
-                    <span aria-hidden="true">↗</span>
-                  </span>
+        <AnimatePresence mode="popLayout">
+          {filteredCerts.map((cert, idx) => (
+            <motion.div
+              key={cert.id}
+              layout
+              initial={{ opacity: 0, scale: 0.96, y: 15 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.96 }}
+              transition={{ duration: 0.35, delay: idx * 0.03 }}
+              onClick={() => setSelectedCert(cert)}
+              className="cert-card group p-5 rounded-2xl bg-bg-alt border border-theme-border hover:border-accent transition-all duration-300 flex flex-col justify-between cursor-pointer hover:-translate-y-1.5 shadow-sm hover:shadow-xl"
+            >
+              <div>
+                {/* Thumbnail Container */}
+                <div className="relative w-full aspect-[4/3] rounded-xl overflow-hidden mb-4 bg-black/5 border border-theme-border group-hover:border-accent/40 transition-colors flex items-center justify-center">
+                  <img
+                    src={cert.image}
+                    alt={cert.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center">
+                    <span className="opacity-0 group-hover:opacity-100 transition-opacity bg-bg/90 backdrop-blur-sm text-fg text-xs font-semibold px-3 py-1.5 rounded-full shadow-md flex items-center gap-1">
+                      <span>Inspect</span>
+                      <span aria-hidden="true">↗</span>
+                    </span>
+                  </div>
                 </div>
+
+                {/* Tag & Date */}
+                <div className="flex items-center justify-between gap-2 mb-2">
+                  <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-accent/10 text-accent font-semibold tracking-wider uppercase">
+                    {cert.category}
+                  </span>
+                  <span className="text-[11px] text-fg-muted font-medium">{cert.date}</span>
+                </div>
+
+                {/* Title & Issuer */}
+                <h3 className="text-base sm:text-lg font-semibold tracking-tight text-fg group-hover:text-accent transition-colors line-clamp-2 mb-1.5">
+                  {cert.title}
+                </h3>
+                <p className="text-xs font-medium text-fg-muted/90 mb-2">
+                  {cert.issuer}
+                </p>
+                <p className="text-xs text-fg-muted line-clamp-2 leading-relaxed">
+                  {cert.description}
+                </p>
               </div>
 
-              {/* Tag & Date */}
-              <div className="flex items-center justify-between gap-2 mb-2">
-                <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-accent/10 text-accent font-semibold tracking-wider uppercase">
-                  {cert.category}
+              {/* Bottom bar */}
+              <div className="pt-4 mt-4 border-t border-theme-border/60 flex items-center justify-between text-xs font-medium">
+                <span className="text-fg-muted group-hover:text-fg transition-colors">
+                  {cert.credentialId ? `ID: ${cert.credentialId.slice(0, 20)}` : "Verified Credential"}
                 </span>
-                <span className="text-[11px] text-fg-muted font-medium">{cert.date}</span>
+                <span className="text-accent group-hover:translate-x-1 transition-transform">
+                  ➔
+                </span>
               </div>
-
-              {/* Title & Issuer */}
-              <h3 className="text-base sm:text-lg font-semibold tracking-tight text-fg group-hover:text-accent transition-colors line-clamp-2 mb-1.5">
-                {cert.title}
-              </h3>
-              <p className="text-xs font-medium text-fg-muted/90 mb-2">
-                {cert.issuer}
-              </p>
-              <p className="text-xs text-fg-muted line-clamp-2 leading-relaxed">
-                {cert.description}
-              </p>
-            </div>
-
-            {/* Bottom bar */}
-            <div className="pt-4 mt-4 border-t border-theme-border/60 flex items-center justify-between text-xs font-medium">
-              <span className="text-fg-muted group-hover:text-fg transition-colors">
-                {cert.credentialId ? `ID: ${cert.credentialId.slice(0, 20)}` : "Verified Credential"}
-              </span>
-              <span className="text-accent group-hover:translate-x-1 transition-transform">
-                ➔
-              </span>
-            </div>
-          </div>
-        ))}
+            </motion.div>
+          ))}
+        </AnimatePresence>
       </div>
 
       {/* Fullscreen Lightbox Modal */}

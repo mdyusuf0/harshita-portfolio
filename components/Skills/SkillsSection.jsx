@@ -1,8 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { motion } from "framer-motion";
 
 const SKILL_GROUPS = [
   {
@@ -38,33 +36,8 @@ const SKILL_GROUPS = [
 ];
 
 const SkillsSection = () => {
-  const sectionRef = useRef(null);
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    gsap.registerPlugin(ScrollTrigger);
-
-    const ctx = gsap.context(() => {
-      const cards = sectionRef.current.querySelectorAll(".skill-card");
-      gsap.from(cards, {
-        opacity: 0,
-        y: 40,
-        duration: 0.8,
-        stagger: 0.08,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 80%",
-          once: true,
-        },
-      });
-    }, sectionRef.current);
-
-    return () => ctx.revert();
-  }, []);
-
   return (
-    <section id="skills-section" ref={sectionRef} className="w-full px-6 sm:px-12 lg:px-20 py-20 bg-bg text-fg">
+    <section id="skills-section" className="w-full px-6 sm:px-12 lg:px-20 py-20 bg-bg text-fg">
       <div className="pj-head mb-10">
         <span className="pj-label">TECHNICAL ARSENAL</span>
         <h2 className="pj-title">skills &amp; proficiencies</h2>
@@ -72,8 +45,12 @@ const SkillsSection = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
         {SKILL_GROUPS.map((group, idx) => (
-          <div
+          <motion.div
             key={group.category}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-20px" }}
+            transition={{ duration: 0.6, delay: idx * 0.08, ease: [0.16, 1, 0.3, 1] }}
             className="skill-card group p-6 sm:p-8 rounded-2xl bg-bg-alt border border-theme-border hover:border-accent transition-all duration-300 flex flex-col justify-between shadow-sm hover:shadow-md hover:-translate-y-1"
           >
             <div>
@@ -101,7 +78,7 @@ const SkillsSection = () => {
                 </span>
               ))}
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
     </section>

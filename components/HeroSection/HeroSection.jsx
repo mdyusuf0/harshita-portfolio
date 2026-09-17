@@ -174,32 +174,35 @@ const HeroSection = () => {
           color: "var(--color-text)",
         }}
       >
-        {/* Background Video & Visual Media */}
+        {/* Background Visual Media: Image by default, Video with audio when playing */}
         <div
           ref={mediaContainerRef}
           className="absolute inset-0 w-full h-full z-0 overflow-hidden bg-[#0A0A0C]"
         >
-          {/* High-definition background video loop with seamless framing & headroom */}
-          <video
-            ref={videoRef}
-            src="/hero-bg-video.mp4"
-            poster="/harshitha-hero.png"
-            autoPlay
-            loop
-            muted
-            playsInline
-            preload="auto"
-            className="w-full h-full object-cover object-[center_top] md:object-[60%_top]"
-          />
-          {/* Seamless fallback image sharing the exact same framing */}
+          {/* Animated Hero Image (Visible when NOT playing) */}
           <img
             src="/harshitha-hero.png"
             alt="Harshitha Chodey"
-            className="absolute inset-0 w-full h-full object-cover object-[center_top] md:object-[60%_top] -z-10"
+            className={`absolute inset-0 w-full h-full object-cover object-[center_top] md:object-[60%_top] transition-opacity duration-700 ease-in-out ${
+              isPlaying ? "opacity-0 pointer-events-none" : "opacity-100"
+            }`}
           />
-          {/* Subtle cinematic gradient overlays matching reference dark/light depth */}
-          <div className="absolute inset-0 bg-gradient-to-r from-bg/95 via-bg/60 to-transparent w-full md:w-[62%]" />
-          <div className="absolute inset-0 bg-gradient-to-t from-bg via-transparent to-bg/25" />
+
+          {/* User's Animated Video with Audio (Plays and becomes visible when playing) */}
+          <video
+            ref={videoRef}
+            src="/animated-video.mp4"
+            loop
+            playsInline
+            preload="auto"
+            onEnded={() => setIsPlaying(false)}
+            className={`absolute inset-0 w-full h-full object-cover object-[center_top] md:object-[60%_top] transition-opacity duration-700 ease-in-out ${
+              isPlaying ? "opacity-100" : "opacity-0 pointer-events-none"
+            }`}
+          />
+
+          {/* Edge vignette - subtle and restricted to left text margin to keep video vibrant and unfaded */}
+          <div className="absolute inset-y-0 left-0 w-full md:w-[42%] bg-gradient-to-r from-bg/75 via-bg/25 to-transparent pointer-events-none" />
         </div>
 
         {/* Content Corner Overlay - Vertically Centered in the Middle-Left */}
