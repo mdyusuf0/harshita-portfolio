@@ -7,9 +7,10 @@ import { motion } from "framer-motion";
 const HeroSection = () => {
   const sectionRef = useRef(null);
   const mediaContainerRef = useRef(null);
+  const videoRef = useRef(null);
   const loaderRef = useRef(null);
   const [loaderDone, setLoaderDone] = useState(false);
-  const [isPulsing, setIsPulsing] = useState(true);
+  const [isPlaying, setIsPlaying] = useState(false);
   const [currentText, setCurrentText] = useState("హర్షిత పోర్ట్‌ఫోలియో");
 
   useEffect(() => {
@@ -72,6 +73,25 @@ const HeroSection = () => {
       } else {
         target.scrollIntoView({ behavior: "smooth" });
       }
+    }
+  };
+
+  const togglePlay = () => {
+    if (!videoRef.current) return;
+    if (isPlaying) {
+      videoRef.current.pause();
+      setIsPlaying(false);
+    } else {
+      videoRef.current.muted = false;
+      videoRef.current
+        .play()
+        .then(() => setIsPlaying(true))
+        .catch((err) => {
+          console.log("Video unmuted play failed, falling back to muted play:", err);
+          videoRef.current.muted = true;
+          videoRef.current.play();
+          setIsPlaying(true);
+        });
     }
   };
 
@@ -154,25 +174,32 @@ const HeroSection = () => {
           color: "var(--color-text)",
         }}
       >
-        {/* Background Visual Media with subtle ambient animation */}
+        {/* Background Video & Visual Media */}
         <div
           ref={mediaContainerRef}
           className="absolute inset-0 w-full h-full z-0 overflow-hidden bg-[#0A0A0C]"
         >
-          <motion.div
-            animate={isPulsing ? { scale: [1, 1.025, 1], filter: ["brightness(0.92)", "brightness(1)", "brightness(0.92)"] } : { scale: 1 }}
-            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-            className="w-full h-full relative"
-          >
-            <img
-              src="/harshitha-hero.png"
-              alt="Harshitha Chodey"
-              className="w-full h-full object-cover object-center md:object-[62%_center]"
-            />
-            {/* Subtle cinematic gradient overlays matching reference dark/light depth */}
-            <div className="absolute inset-0 bg-gradient-to-r from-bg/95 via-bg/60 to-transparent w-full md:w-[65%]" />
-            <div className="absolute inset-0 bg-gradient-to-t from-bg via-transparent to-bg/30" />
-          </motion.div>
+          {/* High-definition background video loop with seamless framing & headroom */}
+          <video
+            ref={videoRef}
+            src="/hero-bg-video.mp4"
+            poster="/harshitha-hero.png"
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="auto"
+            className="w-full h-full object-cover object-[center_top] md:object-[60%_top]"
+          />
+          {/* Seamless fallback image sharing the exact same framing */}
+          <img
+            src="/harshitha-hero.png"
+            alt="Harshitha Chodey"
+            className="absolute inset-0 w-full h-full object-cover object-[center_top] md:object-[60%_top] -z-10"
+          />
+          {/* Subtle cinematic gradient overlays matching reference dark/light depth */}
+          <div className="absolute inset-0 bg-gradient-to-r from-bg/95 via-bg/60 to-transparent w-full md:w-[62%]" />
+          <div className="absolute inset-0 bg-gradient-to-t from-bg via-transparent to-bg/25" />
         </div>
 
         {/* Content Corner Overlay - Vertically Centered in the Middle-Left */}
@@ -303,30 +330,46 @@ const HeroSection = () => {
           </motion.div>
         </motion.div>
 
-        {/* Small Ambient Motion Toggle (Floating Bottom-Right) */}
-        <motion.button
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={loaderDone ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
-          transition={{ duration: 0.8, delay: 2.6, ease: [0.16, 1, 0.3, 1] }}
-          onClick={() => setIsPulsing(!isPulsing)}
-          className="absolute bottom-8 right-8 sm:bottom-12 sm:right-12 z-20 flex items-center gap-3 bg-bg/85 border border-fg/10 hover:border-fg/30 px-4 py-2.5 rounded-full text-fg hover:bg-fg hover:text-bg transition-all active:scale-95 shadow-md group cursor-pointer backdrop-blur-sm"
-          style={{ fontFamily: "'Neue Montreal', 'Inter', sans-serif" }}
-        >
-          <span className="w-7 h-7 rounded-full bg-fg/10 group-hover:bg-bg/10 flex items-center justify-center transition-colors">
-            {isPulsing ? (
-              <svg viewBox="0 0 24 24" className="w-3 h-3 fill-current">
-                <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
-              </svg>
-            ) : (
-              <svg viewBox="0 0 24 24" className="w-3.5 h-3.5 fill-current translate-x-[1px]">
-                <path d="M8 5v14l11-7z"/>
-              </svg>
-            )}
-          </span>
-          <span className="text-[11px] font-bold tracking-[0.18em] uppercase pr-2">
-            {isPulsing ? "PAUSE MOTION" : "PLAY MOTION"}
-          </span>
-        </motion.button>
+        {/* Floating Sparkle + Play/Pause Video Button matching reference */}
+        <div className="absolute bottom-8 right-8 sm:bottom-12 sm:right-12 z-20 flex flex-col items-center gap-3 pointer-events-auto">
+          {/* Reference Sparkle Icon */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={loaderDone ? { opacity: 0.75, scale: 1 } : { opacity: 0, scale: 0.5 }}
+            transition={{ duration: 1, delay: 2.4 }}
+            className="text-fg/40 hover:text-fg/70 transition-colors pointer-events-none"
+          >
+            <svg viewBox="0 0 24 24" className="w-6 h-6 fill-current animate-pulse">
+              <path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z" />
+            </svg>
+          </motion.div>
+
+          <motion.button
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={loaderDone ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
+            transition={{ duration: 0.8, delay: 2.6, ease: [0.16, 1, 0.3, 1] }}
+            onClick={togglePlay}
+            className="flex items-center gap-3 bg-bg/85 border border-fg/10 hover:border-fg/30 px-4 py-2.5 rounded-full text-fg hover:bg-fg hover:text-bg transition-all active:scale-95 shadow-md group cursor-pointer backdrop-blur-sm"
+            style={{ fontFamily: "'Neue Montreal', 'Inter', sans-serif" }}
+          >
+            <span className="w-7 h-7 rounded-full bg-fg/10 group-hover:bg-bg/10 flex items-center justify-center transition-colors">
+              {isPlaying ? (
+                /* Pause Icon */
+                <svg viewBox="0 0 24 24" className="w-3 h-3 fill-current">
+                  <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
+                </svg>
+              ) : (
+                /* Play Icon */
+                <svg viewBox="0 0 24 24" className="w-3.5 h-3.5 fill-current translate-x-[1px]">
+                  <path d="M8 5v14l11-7z" />
+                </svg>
+              )}
+            </span>
+            <span className="text-[11px] font-bold tracking-[0.18em] uppercase pr-2">
+              {isPlaying ? "PAUSE VIDEO" : "PLAY VIDEO"}
+            </span>
+          </motion.button>
+        </div>
       </section>
     </>
   );
