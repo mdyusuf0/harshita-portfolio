@@ -9,17 +9,17 @@ const SERVICES = [
   {
     title: 'Backend & Architecture',
     body:
-      'Node.js, Express.js, FastAPI, MongoDB, SQL, JWT security with brute-force lockout, and Role-Based Access Control (RBAC).',
+      'Node.js, Express.js, FastAPI, MongoDB, and SQL.',
   },
   {
     title: 'AI, ML & LLMs',
     body:
-      'Google Gemini LLM, Tesseract OCR, predictive model pipelines, Retrieval-Augmented Generation (RAG), and vector embeddings with Pinecone.',
+      'Google Gemini LLM, Tesseract OCR, predictive model pipelines, and Retrieval-Augmented Generation (RAG).',
   },
   {
     title: 'Data Analytics & Tools',
     body:
-      'Python data preprocessing, PowerBI AI dashboards, Git/GitHub, Docker containerization, and Agile/Scrum engineering workflows.',
+      'Python data preprocessing, PowerBI AI dashboards, Git/GitHub, and Docker containerization.',
   },
 ];
 

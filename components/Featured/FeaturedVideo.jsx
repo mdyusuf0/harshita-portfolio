@@ -30,7 +30,7 @@ const FeaturedVideo = ({ refForward, ...props }) => {
       {...props}
     >
       <Image
-        src="/harshitha.png"
+        src="/harshitha-featured.jpg"
         alt="Harshitha Chodey portrait"
         fill
         priority
