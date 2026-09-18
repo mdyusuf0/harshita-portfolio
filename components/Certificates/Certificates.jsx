@@ -37,6 +37,16 @@ const CERTIFICATES = [
     description: "Specialized AWS technical training on architecting, fine-tuning, and implementing generative foundation AI models.",
   },
   {
+    id: "cerevyn-intern",
+    title: "Full Stack Developer Internship Completion",
+    issuer: "Cerevyn Solutions Pvt Ltd",
+    category: "Internships",
+    date: "June 1 – June 30, 2026",
+    credentialId: "Dr. Krishna Kishore, CEO & Founder",
+    image: "/certificates/cerevyn-solutions-internship.jpeg",
+    description: "Official internship completion letter certifying successful tenure as Full Stack Developer Intern at Cerevyn Solutions, recognizing sincerity, dedication, and engineering contributions across web platforms and operations modules.",
+  },
+  {
     id: "nit-ml",
     title: "Machine Learning Research Internship",
     issuer: "National Institute of Technology (NIT), Tiruchirappalli",

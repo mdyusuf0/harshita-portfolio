@@ -97,7 +97,7 @@ const SiteFooter = () => {
             <a href="https://civic-flow-2.vercel.app" target="_blank" rel="noreferrer">CivicFlow AI</a>
             <a href="https://intern-mu-one.vercel.app" target="_blank" rel="noreferrer">BioFactor Pulse</a>
             <a href="https://github.com/harshithachodey05-hub/smartpooling-frontend" target="_blank" rel="noreferrer">SmartPooling</a>
-            <a href="https://github.com/harshithachodey05-hub/parking-management" target="_blank" rel="noreferrer">Parking Management</a>
+            <a href="https://parking-management-system-umber.vercel.app" target="_blank" rel="noreferrer">Smart Parking System</a>
           </div>
           <div className="f-col">
             <h3>PORTFOLIO MAP</h3>

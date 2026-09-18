@@ -38,12 +38,12 @@ const PROJECTS = [
     note: "Intelligent carpooling and route-sharing web application optimizing commute sharing, passenger discovery, and route matching.",
   },
   {
-    name: "Automated Parking Management",
-    href: null,
+    name: "Smart Parking Management System",
+    href: "https://parking-management-system-umber.vercel.app",
     github: "https://github.com/harshithachodey05-hub/parking-management",
-    role: "Full Stack • Real-Time Allocation System",
-    kind: "Full Stack",
-    note: "Smart parking management system handling real-time space reservations, automated check-in workflows, and parking capacity tracking.",
+    role: "React.js • Vite • Material-UI • Node.js • REST API • Render",
+    kind: "Live App",
+    note: "Comprehensive smart parking management ecosystem featuring interactive multi-floor slot mapping, real-time vehicle allocation (Car/Bike/EV), dynamic check-in/check-out billing, and an administrative control suite with bulk slot provisioning and live occupancy analytics.",
   },
 ];
 
