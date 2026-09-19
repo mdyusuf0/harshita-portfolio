@@ -83,7 +83,7 @@ const ExperienceSection = () => {
             </div>
 
             {/* Bullets */}
-            <ul className="mt-6 flex flex-col gap-3 text-sm sm:text-base text-fg-muted/90 leading-relaxed">
+            <ul className="mt-6 flex flex-col gap-3 text-sm sm:text-base text-fg-muted font-medium leading-relaxed">
               {exp.bullets.map((b, i) => (
                 <li key={i} className="flex items-start gap-3">
                   <span className="text-accent text-base mt-0.5 font-bold shrink-0">➔</span>

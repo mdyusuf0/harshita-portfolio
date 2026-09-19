@@ -51,14 +51,23 @@ const MoonIcon = () => (
 // site-wide theme switcher: the button reads/writes the active theme on
 // `document.documentElement` (the same attribute the no-flash bootstrap
 // script in `app/layout.js` sets on first paint), and persists the user's
-// choice to localStorage so it survives reloads.
 const ThemeButton = () => {
   const [theme, setTheme] = useState('light');
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
-    const current = document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light';
-    setTheme(current);
+    const syncTheme = () => {
+      const current = document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light';
+      setTheme(current);
+    };
+    syncTheme();
+
+    window.addEventListener('theme-change', syncTheme);
+    window.addEventListener('storage', syncTheme);
+    return () => {
+      window.removeEventListener('theme-change', syncTheme);
+      window.removeEventListener('storage', syncTheme);
+    };
   }, []);
 
   const toggle = () => {
@@ -66,30 +75,32 @@ const ThemeButton = () => {
     setTheme(next);
     if (typeof document !== 'undefined') {
       document.documentElement.dataset.theme = next;
+      document.documentElement.classList.toggle('dark', next === 'dark');
+      window.dispatchEvent(new CustomEvent('theme-change', { detail: next }));
     }
     try {
       localStorage.setItem('theme', next);
     } catch (e) {
-      // localStorage may be unavailable (private mode, etc.) — the toggle
-      // still works for the current session, just doesn't persist.
+      // localStorage may be unavailable (private mode, etc.)
     }
   };
 
   const isDark = theme === 'dark';
-  const label = isDark ? 'LIGHT' : 'DARK';
+  const label = isDark ? 'DARK' : 'LIGHT';
 
   return (
     <button
       type="button"
       onClick={toggle}
-      aria-label="Toggle theme"
+      aria-label={isDark ? "Switch to Light Theme" : "Switch to Dark Theme"}
+      title={isDark ? "Switch to Light Theme" : "Switch to Dark Theme"}
       aria-pressed={isDark}
-      className='nav_btn_lg nav_btn_light flex items-center justify-center hover:bg-brblue py-6 cursor-pointer'
+      className='nav_btn_lg nav_btn_light flex items-center justify-center hover:bg-brblue hover:text-white py-6 cursor-pointer transition-colors duration-200'
     >
-      {isDark ? <SunIcon /> : <MoonIcon />}
+      {isDark ? <MoonIcon /> : <SunIcon />}
       {label}
     </button>
-  )
-}
+  );
+};
 
-export default ThemeButton
+export default ThemeButton;

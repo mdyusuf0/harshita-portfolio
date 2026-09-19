@@ -51,8 +51,14 @@ const themeBootstrap = `
     var saved = localStorage.getItem('theme');
     var theme = saved === 'dark' ? 'dark' : 'light';
     document.documentElement.dataset.theme = theme;
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
   } catch (e) {
     document.documentElement.dataset.theme = 'light';
+    document.documentElement.classList.remove('dark');
   }
 })();
 `;

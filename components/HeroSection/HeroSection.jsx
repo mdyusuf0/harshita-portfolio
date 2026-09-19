@@ -201,8 +201,11 @@ const HeroSection = () => {
             }`}
           />
 
-          {/* Edge vignette - subtle and restricted to left text margin to keep video vibrant and unfaded */}
-          <div className="absolute inset-y-0 left-0 w-full md:w-[42%] bg-gradient-to-r from-bg/75 via-bg/25 to-transparent pointer-events-none" />
+          {/* Top subtle vignette to guarantee navbar contrast across both light & dark themes */}
+          <div className="absolute top-0 inset-x-0 h-32 sm:h-40 bg-gradient-to-b from-bg/95 via-bg/60 to-transparent pointer-events-none z-10 transition-colors duration-300" />
+
+          {/* Edge vignette - provides gentle contrast on the text area while keeping video vibrant */}
+          <div className="absolute inset-y-0 left-0 w-full md:w-[60%] lg:w-[50%] bg-gradient-to-r from-bg via-bg/85 to-transparent pointer-events-none z-[5] transition-colors duration-300" />
         </div>
 
         {/* Content Corner Overlay - Vertically Centered in the Middle-Left */}
@@ -210,11 +213,11 @@ const HeroSection = () => {
           variants={containerVariants}
           initial="hidden"
           animate={loaderDone ? "visible" : "hidden"}
-          className="absolute top-1/2 -translate-y-1/2 left-6 sm:left-12 lg:left-20 z-10 max-w-[540px] flex flex-col items-start text-left pointer-events-auto bg-bg/85 p-6 sm:p-8 rounded-3xl border border-fg/10 lg:bg-transparent lg:p-0 lg:border-none backdrop-blur-md lg:backdrop-blur-none shadow-2xl lg:shadow-none"
+          className="absolute top-1/2 -translate-y-1/2 left-6 sm:left-12 lg:left-20 z-10 max-w-[560px] flex flex-col items-start text-left pointer-events-auto bg-bg/85 dark:bg-[#0A0A0C]/85 lg:bg-bg/40 lg:dark:bg-[#0A0A0C]/65 p-6 sm:p-8 rounded-3xl border border-fg/10 backdrop-blur-md shadow-2xl transition-colors duration-300"
         >
           <motion.span
             variants={itemVariants}
-            className="text-[10px] sm:text-xs font-semibold tracking-[0.25em] text-fg-muted uppercase mb-2"
+            className="text-[10px] sm:text-xs font-semibold tracking-[0.25em] text-fg uppercase mb-2"
             style={{ fontFamily: "'Neue Montreal', 'Inter', sans-serif" }}
           >
             HELLO, I&apos;M HARSHITHA
@@ -235,12 +238,12 @@ const HeroSection = () => {
           >
             FULL STACK DEVELOPER <br />
             &amp; AI / ML <br />
-            <span className="text-fg-muted/65 font-bold">SPECIALIST</span>
+            <span className="text-accent font-bold">SPECIALIST</span>
           </motion.h1>
 
           <motion.p
             variants={itemVariants}
-            className="text-xs sm:text-sm text-fg-muted leading-relaxed mb-8 max-w-[42ch]"
+            className="text-xs sm:text-sm text-fg font-medium leading-relaxed mb-8 max-w-[42ch]"
             style={{ fontFamily: "'Neue Montreal', 'Inter', sans-serif" }}
           >
             Building enterprise-grade full-stack applications, real-time operations dashboards, and intelligent LLM/OCR workflows.
@@ -269,7 +272,7 @@ const HeroSection = () => {
               target="_blank"
               rel="noopener noreferrer"
               download="Harshitha_Chode_Resume.pdf"
-              className="text-xs font-semibold hover:text-accent flex items-center gap-1.5 pb-0.5 border-b border-current transition-all"
+              className="text-xs font-semibold text-fg hover:text-accent flex items-center gap-1.5 pb-0.5 border-b-2 border-fg/30 hover:border-accent transition-all"
               style={{ fontFamily: "'Neue Montreal', 'Inter', sans-serif" }}
             >
               <span>Download Resume</span>
@@ -283,7 +286,7 @@ const HeroSection = () => {
           {/* Social Links on Bottom-Left */}
           <motion.div
             variants={itemVariants}
-            className="flex items-center gap-5 mt-8 text-fg/70"
+            className="flex items-center gap-5 mt-8 text-fg/80"
           >
             <a
               href="https://github.com/harshithachodey05-hub"
@@ -352,7 +355,7 @@ const HeroSection = () => {
             animate={loaderDone ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
             transition={{ duration: 0.8, delay: 2.6, ease: [0.16, 1, 0.3, 1] }}
             onClick={togglePlay}
-            className="flex items-center gap-3 bg-bg/85 border border-fg/10 hover:border-fg/30 px-4 py-2.5 rounded-full text-fg hover:bg-fg hover:text-bg transition-all active:scale-95 shadow-md group cursor-pointer backdrop-blur-sm"
+            className="flex items-center gap-3 bg-bg/90 dark:bg-[#0A0A0C]/90 border border-fg/20 hover:border-fg/40 px-4 py-2.5 rounded-full text-fg hover:bg-fg hover:text-bg transition-all active:scale-95 shadow-lg group cursor-pointer backdrop-blur-md"
             style={{ fontFamily: "'Neue Montreal', 'Inter', sans-serif" }}
           >
             <span className="w-7 h-7 rounded-full bg-fg/10 group-hover:bg-bg/10 flex items-center justify-center transition-colors">
