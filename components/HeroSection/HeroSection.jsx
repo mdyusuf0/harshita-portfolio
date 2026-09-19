@@ -177,7 +177,7 @@ const HeroSection = () => {
         {/* Background Visual Media: Image by default, Video with audio when playing */}
         <div
           ref={mediaContainerRef}
-          className="absolute inset-0 w-full h-full z-0 overflow-hidden bg-[#0A0A0C]"
+          className="absolute inset-0 w-full h-full z-0 overflow-hidden bg-white dark:bg-[#0A0A0C]"
         >
           {/* Animated Hero Image (Visible when NOT playing) */}
           <img

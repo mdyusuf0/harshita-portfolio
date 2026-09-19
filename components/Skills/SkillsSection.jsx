@@ -5,8 +5,8 @@ import { motion } from "framer-motion";
 const SKILL_GROUPS = [
   {
     category: "Programming Languages",
-    skills: ["Python", "JavaScript (ES6+)", "C", "SQL", "Java"],
-    summary: "Core languages utilized across algorithmic problem solving, enterprise backend microservices, and AI pipeline orchestration.",
+    skills: ["Python", "JavaScript", "Java", "C"],
+    summary: "Core languages utilized across algorithmic problem solving, modern web applications, and AI pipeline orchestration.",
   },
   {
     category: "Frontend Engineering",
@@ -15,8 +15,8 @@ const SKILL_GROUPS = [
   },
   {
     category: "Backend & Security",
-    skills: ["Node.js", "Express.js", "FastAPI", "MongoDB", "RESTful APIs", "Role-Based Access Control (RBAC)", "JWT Authentication"],
-    summary: "Architecting secure, role-restricted server systems, automated API endpoints, and brute-force lockout safeguards.",
+    skills: ["Node.js", "Express.js", "FastAPI", "MongoDB", "RESTful APIs"],
+    summary: "Architecting high-performance server architectures, scalable microservices, and robust RESTful API endpoints.",
   },
   {
     category: "AI, ML & LLMs",
@@ -24,14 +24,14 @@ const SKILL_GROUPS = [
     summary: "Deploying intelligent retrieval-augmented generation systems, OCR document processors, and predictive modeling pipelines.",
   },
   {
-    category: "Data & BI",
-    skills: ["PowerBI AI Dashboards", "Data Storytelling", "Data Cleaning & Validation", "Exploratory Data Analysis"],
-    summary: "Translating raw metrics and multi-tenant operations data into actionable executive insights and real-time visual dashboards.",
+    category: "Database",
+    skills: ["MySQL", "SQL", "Database Connectivity", "REST API Integration"],
+    summary: "Designing relational database schemas, structured querying, seamless backend database connectivity, and efficient REST API integrations.",
   },
   {
     category: "Development Practices",
-    skills: ["Git", "GitHub", "Docker", "VS Code", "Agile / Scrum", "Antigravity", "CI/CD Principles"],
-    summary: "Collaborative team workflows, version control discipline, containerized deployments, and rapid iterative sprints.",
+    skills: ["Git", "GitHub", "VS Code", "Google Colab", "Jupyter", "Antigravity", "Vercel", "Render"],
+    summary: "Collaborative version control discipline, interactive notebook experimentation, rapid prototyping, and cloud application deployments.",
   },
 ];
 

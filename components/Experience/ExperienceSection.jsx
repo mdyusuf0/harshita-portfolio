@@ -12,9 +12,9 @@ const EXPERIENCES = [
     bullets: [
       "Spearheaded frontend engineering for BioFactor Pulse, an enterprise agricultural field operations platform, building modular UI components with React.js.",
       "Engineered real-time operations dashboards, field CRM modules, and workforce tracking systems with live leaderboards and automated attendance workflows.",
-      "Integrated backend REST APIs with client-side state and enforced Role-Based Access Control (RBAC), elevating UI rendering performance and multi-tenant security.",
+      "Integrated backend REST APIs with client-side state and structured user authentication, elevating UI rendering performance and multi-tenant security.",
     ],
-    tech: ["React.js", "REST APIs", "RBAC", "State Management", "Enterprise Dashboards"],
+    tech: ["React.js", "REST APIs", "State Management", "Enterprise Dashboards"],
   },
   {
     company: "National Institute of Technology (NIT), Tiruchirappalli",
@@ -35,11 +35,11 @@ const EXPERIENCES = [
     period: "Jun 2025 – Jul 2025",
     location: "Remote (Hyderabad, Telangana)",
     bullets: [
-      "Developed robust web application modules using Java, HTML/CSS, and relational database systems in an Agile/Scrum engineering environment.",
-      "Actively contributed across the complete Software Development Life Cycle (SDLC), participated in daily standups, and submitted tested code deliverables.",
+      "Developed robust web application modules using Java, HTML/CSS, and relational database systems in collaborative engineering environments.",
+      "Actively contributed across the complete development lifecycle, participated in daily standups, and submitted tested code deliverables.",
       "Collaborated with cross-functional engineering teams to implement clean architectural patterns and responsive interface standards.",
     ],
-    tech: ["Java", "HTML5/CSS3", "Relational Databases", "Agile/Scrum", "SDLC"],
+    tech: ["Java", "HTML5/CSS3", "Relational Databases", "Web Modules"],
   },
 ];
 

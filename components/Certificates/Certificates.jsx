@@ -64,7 +64,7 @@ const CERTIFICATES = [
     date: "June 1 – July 1, 2025",
     credentialId: "Dr. Krishna Kishore, Director",
     image: "/certificates/house-of-companies-internship.jpeg",
-    description: "Internship completion certificate recognizing core contributions across Java, web modules, and Agile SDLC sprints.",
+    description: "Internship completion certificate recognizing core contributions across Java, web modules, and collaborative team sprints.",
   },
   {
     id: "tata-forage",
@@ -124,7 +124,7 @@ const CERTIFICATES = [
     date: "July 18, 2026",
     credentialId: "e03cb92b-bebf-4714-9ff0-aa7a58542890",
     image: "/certificates/hp-life-design-thinking.jpeg",
-    description: "Mastering user-centered problem solving, customer feedback synthesis, and agile solution prototyping.",
+    description: "Mastering user-centered problem solving, customer feedback synthesis, and iterative solution prototyping.",
   },
   {
     id: "quizoff-ai",

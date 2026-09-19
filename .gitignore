@@ -16,6 +16,8 @@ node_modules/
 # Misc
 .DS_Store
 *.pem
+*.mp4
+!public/**/*.mp4
 
 # Debug
 npm-debug.log*
