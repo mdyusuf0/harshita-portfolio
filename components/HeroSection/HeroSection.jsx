@@ -201,23 +201,19 @@ const HeroSection = () => {
             }`}
           />
 
-          {/* Top subtle vignette to guarantee navbar contrast across both light & dark themes */}
-          <div className="absolute top-0 inset-x-0 h-32 sm:h-40 bg-gradient-to-b from-bg/95 via-bg/60 to-transparent pointer-events-none z-10 transition-colors duration-300" />
-
-          {/* Edge vignette - provides gentle contrast on the text area while keeping video vibrant */}
-          <div className="absolute inset-y-0 left-0 w-full md:w-[60%] lg:w-[50%] bg-gradient-to-r from-bg via-bg/85 to-transparent pointer-events-none z-[5] transition-colors duration-300" />
+          {/* No overlays or boxes: video is fully visible, crisp, and unblocked */}
         </div>
 
-        {/* Content Corner Overlay - Vertically Centered in the Middle-Left */}
+        {/* Content Corner Overlay - Vertically Centered in the Middle-Left: Pure text, no border or box */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate={loaderDone ? "visible" : "hidden"}
-          className="absolute top-1/2 -translate-y-1/2 left-6 sm:left-12 lg:left-20 z-10 max-w-[560px] flex flex-col items-start text-left pointer-events-auto bg-bg/85 dark:bg-[#0A0A0C]/85 lg:bg-bg/40 lg:dark:bg-[#0A0A0C]/65 p-6 sm:p-8 rounded-3xl border border-fg/10 backdrop-blur-md shadow-2xl transition-colors duration-300"
+          className="absolute top-1/2 -translate-y-1/2 left-6 sm:left-12 lg:left-20 z-10 max-w-[540px] flex flex-col items-start text-left pointer-events-auto"
         >
           <motion.span
             variants={itemVariants}
-            className="text-[10px] sm:text-xs font-semibold tracking-[0.25em] text-fg uppercase mb-2"
+            className="text-[10px] sm:text-xs font-semibold tracking-[0.25em] text-[#060607]/80 uppercase mb-2"
             style={{ fontFamily: "'Neue Montreal', 'Inter', sans-serif" }}
           >
             HELLO, I&apos;M HARSHITHA
@@ -233,7 +229,7 @@ const HeroSection = () => {
           
           <motion.h1
             variants={itemVariants}
-            className="text-4xl sm:text-5xl lg:text-[3.1rem] font-black uppercase leading-[1.05] tracking-tight text-fg mb-6"
+            className="text-4xl sm:text-5xl lg:text-[3.1rem] font-black uppercase leading-[1.05] tracking-tight text-[#060607] mb-6"
             style={{ fontFamily: "'AeonikBold', 'Neue Montreal', sans-serif" }}
           >
             FULL STACK DEVELOPER <br />
@@ -243,7 +239,7 @@ const HeroSection = () => {
 
           <motion.p
             variants={itemVariants}
-            className="text-xs sm:text-sm text-fg font-medium leading-relaxed mb-8 max-w-[42ch]"
+            className="text-xs sm:text-sm text-[#2A2B33] font-medium leading-relaxed mb-8 max-w-[42ch]"
             style={{ fontFamily: "'Neue Montreal', 'Inter', sans-serif" }}
           >
             Building enterprise-grade full-stack applications, real-time operations dashboards, and intelligent LLM/OCR workflows.
@@ -257,7 +253,7 @@ const HeroSection = () => {
             <a
               href="#projects-section"
               onClick={handleScrollToWork}
-              className="px-6 py-3.5 bg-fg text-bg hover:bg-accent hover:text-white rounded-full flex items-center gap-2 text-xs font-semibold tracking-wide transition-all duration-200 active:scale-95 shadow-md cursor-pointer"
+              className="px-6 py-3.5 bg-[#060607] text-[#F9F8FF] hover:bg-accent hover:text-white rounded-full flex items-center gap-2 text-xs font-semibold tracking-wide transition-all duration-200 active:scale-95 shadow-md cursor-pointer"
               style={{ fontFamily: "'Neue Montreal', 'Inter', sans-serif" }}
             >
               <span>View My Work</span>
@@ -272,7 +268,7 @@ const HeroSection = () => {
               target="_blank"
               rel="noopener noreferrer"
               download="Harshitha_Chode_Resume.pdf"
-              className="text-xs font-semibold text-fg hover:text-accent flex items-center gap-1.5 pb-0.5 border-b-2 border-fg/30 hover:border-accent transition-all"
+              className="text-xs font-semibold text-[#060607] hover:text-accent flex items-center gap-1.5 pb-0.5 border-b-2 border-[#060607]/30 hover:border-accent transition-all"
               style={{ fontFamily: "'Neue Montreal', 'Inter', sans-serif" }}
             >
               <span>Download Resume</span>
@@ -286,7 +282,7 @@ const HeroSection = () => {
           {/* Social Links on Bottom-Left */}
           <motion.div
             variants={itemVariants}
-            className="flex items-center gap-5 mt-8 text-fg/80"
+            className="flex items-center gap-5 mt-8 text-[#060607]/80"
           >
             <a
               href="https://github.com/harshithachodey05-hub"
@@ -343,7 +339,7 @@ const HeroSection = () => {
             initial={{ opacity: 0, scale: 0.5 }}
             animate={loaderDone ? { opacity: 0.75, scale: 1 } : { opacity: 0, scale: 0.5 }}
             transition={{ duration: 1, delay: 2.4 }}
-            className="text-fg/40 hover:text-fg/70 transition-colors pointer-events-none"
+            className="text-black/30 hover:text-black/60 transition-colors pointer-events-none"
           >
             <svg viewBox="0 0 24 24" className="w-6 h-6 fill-current animate-pulse">
               <path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z" />
@@ -355,7 +351,7 @@ const HeroSection = () => {
             animate={loaderDone ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
             transition={{ duration: 0.8, delay: 2.6, ease: [0.16, 1, 0.3, 1] }}
             onClick={togglePlay}
-            className="flex items-center gap-3 bg-bg/90 dark:bg-[#0A0A0C]/90 border border-fg/20 hover:border-fg/40 px-4 py-2.5 rounded-full text-fg hover:bg-fg hover:text-bg transition-all active:scale-95 shadow-lg group cursor-pointer backdrop-blur-md"
+            className="flex items-center gap-3 bg-white/90 border border-black/15 hover:border-black/30 px-4 py-2.5 rounded-full text-[#060607] hover:bg-[#060607] hover:text-white transition-all active:scale-95 shadow-md group cursor-pointer backdrop-blur-sm"
             style={{ fontFamily: "'Neue Montreal', 'Inter', sans-serif" }}
           >
             <span className="w-7 h-7 rounded-full bg-fg/10 group-hover:bg-bg/10 flex items-center justify-center transition-colors">
